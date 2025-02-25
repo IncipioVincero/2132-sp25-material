@@ -79,7 +79,7 @@ As in 2.4, provide the running time of the following function in asymptotic (big
 
 def print_duplicates2(li):
 
-  sorted_li = sorted(li)
+  li = sorted(li)
 
   duplicates = []
 
@@ -106,7 +106,7 @@ A simple optimization uses the fact that all duplicates are adjacent to each oth
 
 def print_duplicates3(li):
 
-  sorted_li = sorted(li)
+  li = sorted(li)
 
   i = 1
   while i < len(li):

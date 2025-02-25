@@ -42,7 +42,7 @@ Solving equations of this type is tricky, in general. But here we can use our in
 
 $$(\log_2 4  = 2) \geq \frac{2}{4}$$
 $$(\log_2 8  = 3) \geq \frac{8}{4}$$
-$$(\log_2 16  = 4) = \frac{15}{4}$$
+$$(\log_2 16  = 4) = \frac{16}{4}$$
 
 
 

@@ -94,42 +94,44 @@ class AbstractBinaryTree(AbstractTree):
             children.append(self.right(p))
         return children
 
-    def preorder(self, p):
-      'retrieve a list of elements in the tree in pre-order'
-      parent = self.element(p)
-
-      left_child = self.left(p)
-      if left_child != None:
-        left = self.preorder(left_child)
-      else:  # Base case
-         left = []
-
-      right_child = self.right(p)
-      if right_child != None: 
-        right = self.preorder(right_child)
-      else: # Base case 
-        right = []
-
-      return [parent] + left + right
-      
     def postorder(self, p):
       'retrieve a list of elements in the tree in pre-order'
-      parent = self.element(p)
-      left = self.preorder(self.left(p))
-      right = self.preorder(self.right(p))
-      return  left + right + [parent]
+      if p == None: # Base case 
+          return []
+     
+      parent = p.element()   # "2"
+     
+      left = self.postorder(self.left(p)) # []
+
+      right = self.postorder(self.right(p)) # []  
+      return  left + right + [parent]   # [] + [] + [2] = [2]
       
+      
+    def preorder(self, p):
+      'retrieve a list of elements in the tree in pre-order'
+      if p == None: # Base case 
+          return []
+     
+      parent = p.element()   # "2"
+     
+      left = self.preorder(self.left(p)) # []
+
+      right = self.preorder(self.right(p)) # []  
+      return [parent] + left + right
+      
+
     def inorder(self, p):
       'retrieve a list of elements in the tree in pre-order'
-      parent = self.element(p)
-      left = self.preorder(self.left(p))
-      right = self.preorder(self.right(p))
-      return  left +[parent] +  right 
+      if p == None: # Base case 
+          return []
+     
+      parent = p.element()   # "2"
+     
+      left = self.inorder(self.left(p)) # []
+
+      right = self.inorder(self.right(p)) # []  
+      return  left + [parent] + right  
       
-    
-
-
-
 
 
 class LinkedBinaryTree(AbstractBinaryTree):
@@ -284,3 +286,49 @@ class LinkedBinaryTree(AbstractBinaryTree):
             node._right = t2._root
             t2._root = None
             t2._size = 0
+
+
+def parse_postorder(postorder): 
+
+  stack = []  # use append instead of push
+  
+  for s in postorder: 
+    
+    if s == '+' or s == '*' or s == '-' or s == '/': 
+      # operator
+      right = stack.pop()
+      left = stack.pop()
+
+      node = LinkedBinaryTree._Node(s, left = left, right = right )
+      stack.append(node)
+
+    else: 
+      # operand = number
+      node = LinkedBinaryTree._Node(s)
+      stack.append(node)
+
+  result = LinkedBinaryTree()
+  result._root = stack.pop()       
+  return result
+    
+
+if __name__ == "__main__":
+
+  #tree = LinkedBinaryTree()
+  #
+  #root = tree._add_root("*")
+  #tree._add_right(root, 1)
+  #plus = tree._add_left(root, '+')
+  #two = tree._add_left(plus, 2) 
+  #tree._add_right(plus, 3) 
+
+  #root_position = tree.root()
+
+  tree = parse_postorder([2, 3, '+', 1, '*'])
+
+  print(tree.postorder(tree.root()))
+  print(tree.preorder(tree.root()))
+  print(tree.inorder(tree.root()))
+
+  
+

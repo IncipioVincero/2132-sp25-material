@@ -30,7 +30,7 @@ handles invalid words without causing exceptions
 -30 Points if code does not run correctly
 -10 points if you need to modify their code
 
-##Part 2 - Written (40 pts)
+## Part 2 - Written (40 pts)
 2.1  10 pts
 * -1 for each function that has the wrong place in the order
 * -2 for not recognizing that 2^N = Theta(2^{N+1})
